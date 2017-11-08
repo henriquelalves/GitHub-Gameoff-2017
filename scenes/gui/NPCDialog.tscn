@@ -1,0 +1,83 @@
+[gd_scene load_steps=8 format=1]
+
+[ext_resource path="res://scenes/gui/NPCDialog.gd" type="Script" id=1]
+[ext_resource path="res://scenes/gui/DialogBox.tscn" type="PackedScene" id=2]
+[ext_resource path="res://addons/GodotSTM/simple_text_menu.gd" type="Script" id=3]
+[ext_resource path="res://addons/GodotSTM/GodotSTM_icon.png" type="Texture" id=4]
+[ext_resource path="res://assets/dialog_font.fnt" type="BitmapFont" id=5]
+[ext_resource path="res://addons/GodotTIE/text_interface_engine.gd" type="Script" id=6]
+[ext_resource path="res://addons/GodotTIE/GodotTIE_icon.png" type="Texture" id=7]
+
+[node name="NPCDialog" type="Control"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 0.0
+margin/bottom = 0.0
+script/script = ExtResource( 1 )
+
+[node name="DialogBox" parent="." instance=ExtResource( 2 )]
+
+margin/left = 148.0
+margin/top = 459.0
+margin/right = 639.0
+margin/bottom = 570.0
+
+[node name="Menu" type="Control" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 467.0
+margin/top = 480.0
+margin/right = 821.0
+margin/bottom = 509.0
+script/script = ExtResource( 3 )
+__meta__ = {
+"_editor_icon": ExtResource( 4 )
+}
+options = "restart
+options
+back"
+orientation = 0
+offset = 10
+options_font = ExtResource( 5 )
+signal_argument = 0
+initial_option = 0
+cursor_side = 0
+cursor_offset = 1
+blinking_cursor_rate = 0.0
+options_color = Color( 1, 1, 1, 1 )
+cursor_color = Color( 1, 1, 1, 1 )
+menu_enabled = true
+
+[node name="TextInterfaceEngine" type="ReferenceFrame" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 160.0
+margin/top = 465.0
+margin/right = 629.0
+margin/bottom = 568.0
+script/script = ExtResource( 6 )
+__meta__ = {
+"_editor_icon": ExtResource( 7 )
+}
+SCROLL_ON_MAX_LINES = true
+BREAK_ON_MAX_LINES = true
+AUTO_SKIP_WORDS = true
+LOG_SKIPPED_LINES = true
+SCROLL_SKIPPED_LINES = false
+FONT = ExtResource( 5 )
+PRINT_INPUT = true
+BLINKING_INPUT = true
+INPUT_CHARACTERS_LIMIT = -1
+
+
