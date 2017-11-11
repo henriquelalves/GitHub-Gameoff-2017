@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=1]
+[gd_scene load_steps=6 format=1]
 
 [ext_resource path="res://scenes/gui/Test.gd" type="Script" id=1]
-[ext_resource path="res://scenes/characters/Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/characters/GenericNPC.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/gui/GUIController.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/wooden_tile.png" type="Texture" id=2]
+[ext_resource path="res://scenes/characters/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/characters/GenericNPC.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/gui/GUIController.tscn" type="PackedScene" id=5]
 
 [node name="Test" type="Control"]
 
@@ -17,12 +18,27 @@ margin/right = 40.0
 margin/bottom = 40.0
 script/script = ExtResource( 1 )
 
-[node name="Player" parent="." instance=ExtResource( 2 )]
+[node name="TextureFrame" type="TextureFrame" parent="."]
 
-[node name="GenericNPC" parent="." instance=ExtResource( 3 )]
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = -4.0
+margin/top = -6.0
+margin/right = 890.0
+margin/bottom = 640.0
+texture = ExtResource( 2 )
+modulate = Color( 0.441406, 0.441406, 0.441406, 1 )
+expand = true
+stretch_mode = 2
+
+[node name="Player" parent="." instance=ExtResource( 3 )]
+
+[node name="GenericNPC" parent="." instance=ExtResource( 4 )]
 
 transform/pos = Vector2( 367.301, 175.488 )
 
-[node name="GUIController" parent="." instance=ExtResource( 4 )]
+[node name="GUIController" parent="." instance=ExtResource( 5 )]
 
 

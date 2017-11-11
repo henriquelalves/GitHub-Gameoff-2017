@@ -206,10 +206,8 @@ func _fixed_process(delta):
 			if(o["buff_tag"] != "" and _buff_beginning == true):
 				emit_signal("tag_buff", o["buff_tag"])
 			
-			if (_turbo): # In case of turbo, print everything on this buff
-				o["buff_vel"] = 0
-			
-			if(o["buff_vel"] == 0): # If the velocity is 0, than just print everything
+			if(o["buff_vel"] == 0 or _turbo): # If the velocity is 0, than just print everything
+				_turbo = false
 				while(o["buff_text"] != ""): # Not optimal (not really printing everything at the same time); but is the only way to work with line break
 					if(AUTO_SKIP_WORDS and (o["buff_text"][0] == " " or _buff_beginning)):
 						_skip_word()
@@ -251,8 +249,8 @@ func _fixed_process(delta):
 			if(o["buff_tag"] != "" and _buff_beginning == true):
 				emit_signal("tag_buff", o["buff_tag"])
 				_buff_beginning = false
-			if(_turbo): # Ignore this break
-				_buffer.pop_front()
+#			if(_turbo): # Ignore this break
+#				_buffer.pop_front()
 			elif(!_on_break):
 				emit_signal("enter_break")
 				_on_break = true
@@ -280,15 +278,17 @@ func _fixed_process(delta):
 
 func _input(event):
 	if(event.type == InputEvent.KEY and event.is_pressed() == true ):
-		if(SCROLL_SKIPPED_LINES and event.scancode == KEY_UP or event.scancode == KEY_DOWN): # User is just scrolling the text
-			if(event.scancode == KEY_UP):
+		if (_state == 1 and event.is_action_pressed("ui_accept") and !_on_break):
+			_turbo = true
+		if(SCROLL_SKIPPED_LINES and event.is_action_pressed("ui_up") or event.is_action_pressed("ui_down")): # User is just scrolling the text
+			if(event.is_action_pressed("ui_up")):
 				if(_label.get_lines_skipped() > 0):
 					_label.set_lines_skipped(_label.get_lines_skipped()-1)
 			else:
 				if(_label.get_lines_skipped() < _label.get_line_count()-_max_lines):
 					_label.set_lines_skipped(_label.get_lines_skipped()+1)
 		elif(_state == 1 and _on_break): # If its on a break
-			if(event.scancode == _break_key):
+			if(event.is_action_pressed("ui_accept")):
 				emit_signal("resume_break")
 				_buffer.pop_front() # Pop out break buff
 				_on_break = false

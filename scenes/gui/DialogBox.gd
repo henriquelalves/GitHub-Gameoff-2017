@@ -3,7 +3,7 @@ extends ReferenceFrame
 # Such is Life
 # by Henrique Alves
 
-# Violets are blue,S
+# Violets are blue,
 # Cookies are the best,
 # Spent a day creating this node script only to discover 24h later that Godot already has a patch9frame node
 # But at least the dialog box is working, so that's something I guess.

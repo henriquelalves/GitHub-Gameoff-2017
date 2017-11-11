@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-export(float) var vel = 4.0
+export(float) var vel = 256.0
 
 onready var DIRECTIONS = {
 "RIGHT": Vector2(1,0),
@@ -25,20 +25,37 @@ func _input(event):
 			var result = space_state.intersect_ray(get_pos(), get_pos() + direction*(texture_width/2.0 + 2), [self])
 			if (not result.empty()):
 				if result["collider"].is_in_group("interactables"):
+					get_node("AnimationPlayer").stop(true)
 					result["collider"].interact()
+		if event.is_action_pressed("ui_down"):
+			get_node("AnimationPlayer").play("move_down")
+		if event.is_action_pressed("ui_left"):
+			get_node("AnimationPlayer").play("move_left")
+		if event.is_action_pressed("ui_right"):
+			get_node("AnimationPlayer").play("move_right")
+		if event.is_action_pressed("ui_up"):
+			get_node("AnimationPlayer").play("move_up")
 
 func _fixed_process(delta):
 	if global.state == global.STATES.PLAY:
 		# Move
+		var moving = false
 		if Input.is_action_pressed("ui_up"):
-			move(Vector2(0.0, -vel))
+			moving = true
+			move(Vector2(0.0, -vel*delta))
 			direction = DIRECTIONS["UP"]
 		if Input.is_action_pressed("ui_down"):
-			move(Vector2(0.0, vel))
+			moving = true
+			move(Vector2(0.0, vel*delta))
 			direction = DIRECTIONS["DOWN"]
 		if Input.is_action_pressed("ui_left"):
-			move(Vector2(-vel, 0.0))
+			moving = true
+			move(Vector2(-vel*delta, 0.0))
 			direction = DIRECTIONS["LEFT"]
 		if Input.is_action_pressed("ui_right"):
-			move(Vector2(vel, 0.0))
+			moving = true
+			move(Vector2(vel*delta, 0.0))
 			direction = DIRECTIONS["RIGHT"]
+		
+		if not moving:
+			get_node("AnimationPlayer").stop(true)
