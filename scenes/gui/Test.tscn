@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=1]
+[gd_scene load_steps=8 format=1]
 
 [ext_resource path="res://scenes/gui/Test.gd" type="Script" id=1]
-[ext_resource path="res://assets/wooden_tile.png" type="Texture" id=2]
-[ext_resource path="res://scenes/characters/Player.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/characters/GenericNPC.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/gui/GUIController.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/stage/wooden_tile.png" type="Texture" id=2]
+[ext_resource path="res://scenes/stages/wall_tileset.tres" type="TileSet" id=3]
+[ext_resource path="res://scenes/characters/Box.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/characters/Sheriff.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/characters/Portal.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/stage/stairs.png" type="Texture" id=7]
 
 [node name="Test" type="Control"]
 
@@ -17,6 +19,10 @@ margin/top = 0.0
 margin/right = 40.0
 margin/bottom = 40.0
 script/script = ExtResource( 1 )
+north_stage = "Test2"
+east_stage = ""
+south_stage = ""
+west_stage = ""
 
 [node name="TextureFrame" type="TextureFrame" parent="."]
 
@@ -24,21 +30,51 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = -4.0
-margin/top = -6.0
-margin/right = 890.0
+margin/left = 1.0
+margin/top = 0.0
+margin/right = 800.0
 margin/bottom = 640.0
 texture = ExtResource( 2 )
 modulate = Color( 0.441406, 0.441406, 0.441406, 1 )
 expand = true
 stretch_mode = 2
 
-[node name="Player" parent="." instance=ExtResource( 3 )]
+[node name="TileMap" type="TileMap" parent="."]
 
-[node name="GenericNPC" parent="." instance=ExtResource( 4 )]
+mode = 0
+tile_set = ExtResource( 3 )
+cell/size = Vector2( 64, 64 )
+cell/quadrant_size = 16
+cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+cell/half_offset = 2
+cell/tile_origin = 0
+cell/y_sort = false
+collision/use_kinematic = false
+collision/friction = 1.0
+collision/bounce = 0.0
+collision/layers = 1
+collision/mask = 1
+occluder/light_mask = 1
+tile_data = IntArray( 0, 0, 1, 0, 2, 0, 3, 0, 4, 0, 6, 0, 7, 0, 8, 0, 9, 0, 10, 0, 11, 0, 12, 0, 65536, 0, 65548, 0, 131072, 0, 131078, 0, 131079, 0, 131080, 0, 131081, 0, 131082, 0, 131084, 0, 196608, 0, 196618, 0, 196620, 0, 262144, 0, 262150, 0, 262151, 0, 262152, 0, 262154, 0, 262156, 0, 327680, 0, 327691, 0, 327692, 0, 393216, 0, 393222, 0, 393223, 0, 393224, 0, 393226, 0, 393228, 0, 458752, 0, 458761, 0, 458764, 0, 524288, 0, 524300, 0, 589824, 0, 589825, 0, 589826, 0, 589827, 0, 589828, 0, 589829, 0, 589830, 0, 589831, 0, 589832, 0, 589833, 0, 589834, 0, 589835, 0, 589836, 0 )
 
-transform/pos = Vector2( 367.301, 175.488 )
+[node name="Box" parent="." instance=ExtResource( 4 )]
 
-[node name="GUIController" parent="." instance=ExtResource( 5 )]
+transform/pos = Vector2( 608, 352 )
+
+[node name="Character" parent="." instance=ExtResource( 5 )]
+
+transform/pos = Vector2( 160, 160 )
+
+[node name="Portal" parent="." instance=ExtResource( 6 )]
+
+editor/display_folded = true
+transform/pos = Vector2( 736, 544 )
+next_portal = "test_Test2"
+
+[node name="Sprite" parent="Portal"]
+
+texture = ExtResource( 7 )
+vframes = 2
 
 
+[editable path="Portal"]

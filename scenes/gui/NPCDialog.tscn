@@ -4,10 +4,12 @@
 [ext_resource path="res://scenes/gui/DialogBox.tscn" type="PackedScene" id=2]
 [ext_resource path="res://addons/GodotSTM/simple_text_menu.gd" type="Script" id=3]
 [ext_resource path="res://addons/GodotSTM/GodotSTM_icon.png" type="Texture" id=4]
-[ext_resource path="res://assets/dialog_font.fnt" type="BitmapFont" id=5]
+[ext_resource path="res://assets/gui/dialog_font.fnt" type="BitmapFont" id=5]
 [ext_resource path="res://addons/GodotTIE/text_interface_engine.gd" type="Script" id=6]
 [ext_resource path="res://addons/GodotTIE/GodotTIE_icon.png" type="Texture" id=7]
-[ext_resource path="res://assets/dialog-arrow.png" type="Texture" id=8]
+[ext_resource path="res://assets/gui/dialog-arrow.png" type="Texture" id=8]
+
+
 
 [sub_resource type="Animation" id=1]
 

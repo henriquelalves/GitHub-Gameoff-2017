@@ -8,9 +8,15 @@ onready var DIRECTIONS = {
 "DOWN": Vector2(0,1),
 "LEFT": Vector2(-1,0)
 }
-onready var texture_width = get_node("Sprite").get_texture().get_width()
+onready var texture_width = 64
 
 onready var direction = DIRECTIONS["DOWN"]
+onready var blinking = false
+
+func set_blinking(b):
+	blinking = b
+	if b == false:
+		get_node("Sprite").show()
 
 func _ready():
 	set_fixed_process(true)
@@ -37,6 +43,12 @@ func _input(event):
 			get_node("AnimationPlayer").play("move_up")
 
 func _fixed_process(delta):
+	if blinking:
+		if not get_node("Sprite").is_visible():
+			get_node("Sprite").show()
+		else:
+			get_node("Sprite").hide()
+	
 	if global.state == global.STATES.PLAY:
 		# Move
 		var moving = false
@@ -56,6 +68,10 @@ func _fixed_process(delta):
 			moving = true
 			move(Vector2(vel*delta, 0.0))
 			direction = DIRECTIONS["RIGHT"]
+		
+		if moving and is_colliding():
+			if get_collider().is_in_group("pushable"):
+				get_collider().move(-get_collision_normal())
 		
 		if not moving:
 			get_node("AnimationPlayer").stop(true)
