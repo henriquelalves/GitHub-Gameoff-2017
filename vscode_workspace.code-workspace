@@ -1,0 +1,10 @@
+{
+	"folders": [
+		{
+			"path": "scenes"
+		}
+	],
+	"settings": {
+		"editor.wordWrap": "on"
+	}
+}

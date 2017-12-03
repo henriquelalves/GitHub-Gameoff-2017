@@ -47,7 +47,7 @@ func on_timeout():
 	global.player.set_pos(portal_to_pos)
 
 func on_tween_complete(obj, key):
-	if(obj == global.player):
+	if obj == global.player:
 		old_stage.queue_free()
 		global.set_state(global.STATES.PLAY)
 

@@ -43,6 +43,9 @@ func _input(event):
 			get_node("AnimationPlayer").play("move_up")
 
 func _fixed_process(delta):
+	if test_move(Vector2(0.1,0.1)) || test_move(Vector2(-0.1,-0.1)):
+		move(Vector2(0,0))
+	
 	if blinking:
 		if not get_node("Sprite").is_visible():
 			get_node("Sprite").show()

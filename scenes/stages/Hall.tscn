@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=1]
+[gd_scene load_steps=13 format=1]
 
 [ext_resource path="res://scenes/stages/Stage.gd" type="Script" id=1]
 [ext_resource path="res://assets/stage/wooden_tile.png" type="Texture" id=2]
@@ -8,6 +8,29 @@
 [ext_resource path="res://assets/stage/stairs.png" type="Texture" id=6]
 [ext_resource path="res://scenes/stages/persistents/HallPersistent.gd" type="Script" id=7]
 [ext_resource path="res://scenes/characters/Table.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/characters/Waiter.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/characters/Piano.tscn" type="PackedScene" id=10]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 31, 31 )
+
+[sub_resource type="Animation" id=2]
+
+length = 5.0
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:transform/pos")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = {
+"times": FloatArray( 0, 1, 4, 4.5 ),
+"transitions": FloatArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 544, 352 ), Vector2( 544, 352 ), Vector2( 672, 224 ), Vector2( 672, 224 ) ]
+}
 
 [node name="Hall" type="Control"]
 
@@ -58,9 +81,18 @@ collision/mask = 1
 occluder/light_mask = 1
 tile_data = IntArray( 65536, 0, 65537, 0, 65538, 0, 65539, 0, 65540, 0, 65542, 0, 65543, 0, 65544, 0, 65545, 0, 65546, 0, 65547, 0, 65548, 0, 131072, 0, 131078, 0, 131084, 0, 196608, 0, 196611, 0, 196612, 0, 196613, 0, 196620, 0, 262144, 0, 262156, 0, 327680, 0, 393216, 0, 393228, 0, 458752, 0, 458764, 0, 524288, 0, 524300, 0, 589824, 0, 589825, 0, 589826, 0, 589827, 0, 589828, 0, 589831, 0, 589832, 0, 589833, 0, 589834, 0, 589835, 0, 589836, 0 )
 
-[node name="Character" parent="." instance=ExtResource( 4 )]
+[node name="Sheriff" parent="." instance=ExtResource( 4 )]
 
 transform/pos = Vector2( 544, 352 )
+
+[node name="CollisionShape2D" parent="Sheriff"]
+
+shape = SubResource( 1 )
+
+[node name="AnimationPlayer" parent="Sheriff"]
+
+anims/move_hall = SubResource( 2 )
+autoplay = "move_hall"
 
 [node name="HallStairs" parent="." instance=ExtResource( 5 )]
 
@@ -88,6 +120,15 @@ transform/pos = Vector2( 224, 416 )
 
 frame = 1
 
+[node name="Waiter" parent="." instance=ExtResource( 9 )]
 
+transform/pos = Vector2( 224, 160 )
+
+[node name="Piano" parent="." instance=ExtResource( 10 )]
+
+transform/pos = Vector2( 672, 160 )
+
+
+[editable path="Sheriff"]
 [editable path="HallStairs"]
 [editable path="Table 2"]
